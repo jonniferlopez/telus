@@ -391,8 +391,14 @@ def detect_query_type(
     #    Non-Specific Address just because it contains " st".
     # ------------------------------------------------------------------
     if _is_chain(q):
-        # Specific modifier: address-like text
-        has_specific = bool(re.search(r"\d+\s+[a-z]", q)) or _has_street_type(q)
+        # Specific modifier: address-like text.
+        # Use a safe word-split check instead of a potentially slow regex.
+        q_words = q.split()
+        _has_num_word = any(
+            w.rstrip(".,") .isdigit() and idx + 1 < len(q_words)
+            for idx, w in enumerate(q_words)
+        )
+        has_specific = _has_num_word or _has_street_type(q)
 
         # General modifier: city/area/direction word
         general_terms = (" in ", " near ", " at ", " downtown", " uptown", " north ", " south ",
