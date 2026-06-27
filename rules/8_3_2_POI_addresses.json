@@ -1,0 +1,80 @@
+{
+  "rule_number": "8.3.2",
+  "title": "POI Address Queries",
+  "section": "8.3.2",
+  "applies_to": "Point of Interest",
+  "description": "Rules for evaluating results when the user queries a specific Point of Interest (POI) such as a museum, park, hospital, school, library, theater, or other named place.",
+  "decision_logic": [
+    {
+      "step": 1,
+      "condition": "Result is the exact POI queried (same name, same location)",
+      "rating": "Navigational",
+      "notes": "Perfect match — user navigates directly to this POI"
+    },
+    {
+      "step": 2,
+      "condition": "Result is a different name but is the same physical POI (official vs. colloquial name, or building/complex name)",
+      "rating": "Navigational",
+      "notes": "Same place, different name — still a perfect navigational result"
+    },
+    {
+      "step": 3,
+      "condition": "Result is the same category of POI (e.g., another museum) in the same area/neighborhood",
+      "rating": "Excellent",
+      "notes": "Same type of POI, same general area — high relevance"
+    },
+    {
+      "step": 4,
+      "condition": "Result is the same category of POI in the same city but different neighborhood",
+      "rating": "Good",
+      "notes": "Same type, same city but not exact area"
+    },
+    {
+      "step": 5,
+      "condition": "Result is a related but different category of POI (e.g., art gallery for a museum query)",
+      "rating": "Acceptable",
+      "notes": "Related category, marginally useful"
+    },
+    {
+      "step": 6,
+      "condition": "Result is unrelated to the queried POI type or location",
+      "rating": "Off Topic",
+      "notes": "No meaningful connection to the POI query"
+    }
+  ],
+  "exceptions": [
+    "Well-known POIs (major landmarks) have stricter Navigational criteria — only the exact POI qualifies",
+    "If a POI has multiple entrances or buildings, any official entrance/building rates Navigational",
+    "For hospital queries, showing the ER entrance vs. main entrance both rate Navigational"
+  ],
+  "calibration_examples": [
+    {
+      "query": "Metropolitan Museum of Art",
+      "result": "The Met",
+      "conditions": ["'The Met' is the official colloquial name for the Metropolitan Museum of Art", "Same physical location"],
+      "rating": "Navigational",
+      "reasoning": "Same POI, official colloquial name — step 2 applies"
+    },
+    {
+      "query": "Art Institute of Chicago",
+      "result": "Museum of Contemporary Art Chicago",
+      "conditions": ["Different museum", "Located in same area of Chicago"],
+      "rating": "Excellent",
+      "reasoning": "Same POI category (museum) in same area — step 3 applies"
+    },
+    {
+      "query": "Central Park",
+      "result": "Bryant Park",
+      "conditions": ["Different park", "Bryant Park is in a different neighborhood of NYC"],
+      "rating": "Good",
+      "reasoning": "Same category (park), same city but different neighborhood — step 4 applies"
+    },
+    {
+      "query": "Smithsonian Natural History Museum",
+      "result": "Gift Shop at the Mall",
+      "conditions": ["Unrelated commercial establishment", "No POI relevance"],
+      "rating": "Off Topic",
+      "reasoning": "No meaningful connection to the museum query — step 6 applies"
+    }
+  ]
+}

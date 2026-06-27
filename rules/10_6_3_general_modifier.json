@@ -1,0 +1,74 @@
+{
+  "rule_number": "10.6.3a",
+  "title": "Chain Business + General Location Modifier",
+  "section": "10.6.3",
+  "applies_to": "Chain Business + General Location Modifier",
+  "description": "Rules for evaluating map results when the user queries a chain business with a general location modifier such as a city, neighborhood, or directional area (e.g., 'Starbucks in Seattle', 'McDonald's downtown', 'KFC near Midtown').",
+  "decision_logic": [
+    {
+      "step": 1,
+      "condition": "Result is NOT the queried chain",
+      "rating": "Off Topic",
+      "notes": "Must be the correct chain brand"
+    },
+    {
+      "step": 2,
+      "condition": "Result IS the queried chain AND is located in the exact specified area",
+      "rating": "Excellent",
+      "notes": "Chain in the correct general area — high relevance. Multiple locations in the area also rate Excellent."
+    },
+    {
+      "step": 3,
+      "condition": "Result IS the queried chain but is in an adjacent neighborhood or just outside the specified area",
+      "rating": "Good",
+      "notes": "Close to specified area but not exact — still useful"
+    },
+    {
+      "step": 4,
+      "condition": "Result IS the queried chain but is in a different part of the city (not the specified area)",
+      "rating": "Acceptable",
+      "notes": "Same city but wrong area — marginally relevant"
+    },
+    {
+      "step": 5,
+      "condition": "Result IS the queried chain but is in a completely different city or area",
+      "rating": "Off Topic",
+      "notes": "Wrong city entirely — not relevant to the modifier"
+    }
+  ],
+  "exceptions": [
+    "If the general modifier is ambiguous (e.g., 'downtown' could apply to multiple cities), use judgment",
+    "For directional modifiers (north, south), the result should be in that general direction from city center",
+    "If there are no locations of the chain in the specified area, the nearest one may rate Good"
+  ],
+  "calibration_examples": [
+    {
+      "query": "Starbucks in Capitol Hill",
+      "result": "Starbucks on Broadway E",
+      "conditions": ["Correct chain", "Result is on Broadway in Capitol Hill area"],
+      "rating": "Excellent",
+      "reasoning": "Starbucks located directly in Capitol Hill — step 2 applies"
+    },
+    {
+      "query": "McDonald's downtown Chicago",
+      "result": "McDonald's on N Michigan Ave",
+      "conditions": ["Correct chain", "N Michigan Ave is downtown Chicago"],
+      "rating": "Excellent",
+      "reasoning": "McDonald's in downtown Chicago matches the general modifier — step 2"
+    },
+    {
+      "query": "Wendy's near midtown",
+      "result": "Wendy's in Upper East Side",
+      "conditions": ["Correct chain", "Upper East Side is adjacent to midtown area"],
+      "rating": "Good",
+      "reasoning": "Adjacent to specified area — step 3 applies"
+    },
+    {
+      "query": "KFC in Brooklyn",
+      "result": "KFC in Queens",
+      "conditions": ["Correct chain", "Queens is a different borough, not Brooklyn"],
+      "rating": "Acceptable",
+      "reasoning": "Different borough but same metro area — step 4 applies"
+    }
+  ]
+}

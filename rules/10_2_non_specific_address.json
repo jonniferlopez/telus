@@ -1,0 +1,66 @@
+{
+  "rule_number": "10.2",
+  "title": "Non-Specific Address Queries",
+  "section": "10.2",
+  "applies_to": "Non-Specific Address",
+  "description": "Rules for evaluating results when the user queries an address without a house number, or an ambiguous address that could match multiple locations (e.g., 'Main Street', '5th Avenue', 'Oak Road').",
+  "decision_logic": [
+    {
+      "step": 1,
+      "condition": "Query is a street name only (no number). Result is the most prominent/central segment of that street in the viewport.",
+      "rating": "Excellent",
+      "notes": "Best possible interpretation of a non-specific address"
+    },
+    {
+      "step": 2,
+      "condition": "Query is ambiguous (e.g., 'Main Street' exists in multiple cities). Result is the most likely/prominent interpretation.",
+      "rating": "Excellent",
+      "notes": "Most prominent interpretation shown — correct disambiguation"
+    },
+    {
+      "step": 3,
+      "condition": "Result is a valid but less prominent interpretation of the non-specific address",
+      "rating": "Good",
+      "notes": "Valid match but not the most obvious interpretation"
+    },
+    {
+      "step": 4,
+      "condition": "Result is a business or POI ON the queried street (not the street itself)",
+      "rating": "Acceptable",
+      "notes": "Shows something on the street rather than the street itself — marginally useful"
+    },
+    {
+      "step": 5,
+      "condition": "Result has no connection to the queried street name",
+      "rating": "Off Topic",
+      "notes": "Not related to the queried address"
+    }
+  ],
+  "exceptions": [
+    "If the street is so common that disambiguation is impossible, Excellent is appropriate for any reasonable match",
+    "If the user appears to be searching for a business with a street-name address (context clues), treat as Business query"
+  ],
+  "calibration_examples": [
+    {
+      "query": "Main Street",
+      "result": "Main St, Springfield (central segment)",
+      "conditions": ["Query is street name only", "Result is the main/central segment of Main Street in the viewport"],
+      "rating": "Excellent",
+      "reasoning": "Shows the most prominent segment of the queried street — step 1 applies"
+    },
+    {
+      "query": "5th Avenue",
+      "result": "5th Avenue, New York City",
+      "conditions": ["Ambiguous street name", "NYC's 5th Ave is the most prominent worldwide"],
+      "rating": "Excellent",
+      "reasoning": "Most prominent disambiguation of the street name — step 2 applies"
+    },
+    {
+      "query": "Oak Road",
+      "result": "Starbucks on Oak Road",
+      "conditions": ["Query is a street name", "Result is a business on that street, not the street itself"],
+      "rating": "Acceptable",
+      "reasoning": "Shows a POI on the queried street rather than the street — step 4 applies"
+    }
+  ]
+}

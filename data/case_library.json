@@ -1,0 +1,753 @@
+[
+  {
+    "id": 1,
+    "query_type": "Transit Query",
+    "section": "5.16.1",
+    "query": "Davenport Station",
+    "result": "King Station",
+    "conditions": [
+      "No exact Davenport Station found",
+      "Station inside requested locality"
+    ],
+    "rating": "Excellent",
+    "reasoning": "King Station is in the same locality as the queried Davenport Station. No exact match exists, but same-locality rule applies.",
+    "keywords": [
+      "transit",
+      "station",
+      "locality",
+      "same city"
+    ]
+  },
+  {
+    "id": 2,
+    "query_type": "Transit Query",
+    "section": "5.16.1",
+    "query": "Union Station Chicago",
+    "result": "Union Station Chicago",
+    "conditions": [
+      "Exact name match",
+      "Exact location match"
+    ],
+    "rating": "Navigational",
+    "reasoning": "Exact match to the queried Union Station in Chicago.",
+    "keywords": [
+      "transit",
+      "station",
+      "exact match",
+      "navigational"
+    ]
+  },
+  {
+    "id": 3,
+    "query_type": "Transit Query",
+    "section": "5.16.1",
+    "query": "Main Street Subway Station",
+    "result": "Danforth Station",
+    "conditions": [
+      "No Main Street Station found",
+      "Danforth is in a neighboring locality"
+    ],
+    "rating": "Good",
+    "reasoning": "Neighboring locality station — one step removed from the same locality.",
+    "keywords": [
+      "transit",
+      "subway",
+      "neighboring locality"
+    ]
+  },
+  {
+    "id": 4,
+    "query_type": "Transit Query",
+    "section": "5.16.1",
+    "query": "Bloor-Yonge Station",
+    "result": "Bloor-Yonge Station",
+    "conditions": [
+      "Exact station match"
+    ],
+    "rating": "Navigational",
+    "reasoning": "Exact transit station match.",
+    "keywords": [
+      "transit",
+      "subway",
+      "exact",
+      "navigational"
+    ]
+  },
+  {
+    "id": 5,
+    "query_type": "Transit Query",
+    "section": "5.16.1",
+    "query": "Bay Station",
+    "result": "Museum Station",
+    "conditions": [
+      "No exact Bay Station match",
+      "Museum Station is in the same locality (downtown Toronto)"
+    ],
+    "rating": "Excellent",
+    "reasoning": "Same locality transit station — Excellent rating applies.",
+    "keywords": [
+      "transit",
+      "station",
+      "downtown",
+      "same city"
+    ]
+  },
+  {
+    "id": 6,
+    "query_type": "Chain Business",
+    "section": "10.6.2",
+    "query": "Wendy's",
+    "result": "Wendy's on Main St",
+    "conditions": [
+      "Fresh viewport",
+      "Two closer Wendy's exist in viewport but not shown",
+      "User outside viewport"
+    ],
+    "rating": "Good",
+    "reasoning": "Two closer Wendy's exist — distance demotion applies. 1-2 closer locations = Good.",
+    "keywords": [
+      "chain",
+      "wendy's",
+      "distance demotion",
+      "fresh viewport"
+    ]
+  },
+  {
+    "id": 7,
+    "query_type": "Chain Business",
+    "section": "10.6.2",
+    "query": "McDonald's",
+    "result": "McDonald's on Oak Ave",
+    "conditions": [
+      "Fresh viewport",
+      "No closer McDonald's in viewport",
+      "Is the closest location"
+    ],
+    "rating": "Navigational",
+    "reasoning": "Closest McDonald's with fresh viewport and no closer alternatives.",
+    "keywords": [
+      "chain",
+      "mcdonald's",
+      "closest",
+      "navigational",
+      "fresh viewport"
+    ]
+  },
+  {
+    "id": 8,
+    "query_type": "Chain Business",
+    "section": "10.6.2",
+    "query": "Starbucks",
+    "result": "Starbucks on 5th Ave",
+    "conditions": [
+      "Fresh viewport",
+      "Four closer Starbucks in viewport not shown"
+    ],
+    "rating": "Acceptable",
+    "reasoning": "3+ closer Starbucks exist — heavy distance demotion to Acceptable.",
+    "keywords": [
+      "chain",
+      "starbucks",
+      "distance demotion",
+      "many closer"
+    ]
+  },
+  {
+    "id": 9,
+    "query_type": "Chain Business",
+    "section": "10.6.2",
+    "query": "Subway",
+    "result": "Pizza Hut",
+    "conditions": [
+      "Result is not the Subway restaurant chain"
+    ],
+    "rating": "Off Topic",
+    "reasoning": "Result is a completely different restaurant chain — Off Topic.",
+    "keywords": [
+      "chain",
+      "wrong brand",
+      "off topic"
+    ]
+  },
+  {
+    "id": 10,
+    "query_type": "Chain Business",
+    "section": "10.6.2",
+    "query": "KFC",
+    "result": "KFC Downtown",
+    "conditions": [
+      "Stale viewport",
+      "No closer KFC visible in stale viewport"
+    ],
+    "rating": "Excellent",
+    "reasoning": "Correct chain with stale viewport — reduced confidence but correct brand match.",
+    "keywords": [
+      "chain",
+      "kfc",
+      "stale viewport",
+      "excellent"
+    ]
+  },
+  {
+    "id": 11,
+    "query_type": "Chain Business + General Location Modifier",
+    "section": "10.6.3",
+    "query": "Starbucks in Capitol Hill",
+    "result": "Starbucks on Broadway E",
+    "conditions": [
+      "Correct chain",
+      "Broadway E is in Capitol Hill neighborhood"
+    ],
+    "rating": "Excellent",
+    "reasoning": "Starbucks located directly in the specified Capitol Hill area.",
+    "keywords": [
+      "chain",
+      "starbucks",
+      "general modifier",
+      "neighborhood",
+      "in area"
+    ]
+  },
+  {
+    "id": 12,
+    "query_type": "Chain Business + General Location Modifier",
+    "section": "10.6.3",
+    "query": "McDonald's downtown Chicago",
+    "result": "McDonald's on N Michigan Ave",
+    "conditions": [
+      "Correct chain",
+      "N Michigan Ave is downtown Chicago"
+    ],
+    "rating": "Excellent",
+    "reasoning": "McDonald's in downtown Chicago matches the general modifier.",
+    "keywords": [
+      "chain",
+      "mcdonald's",
+      "downtown",
+      "general modifier"
+    ]
+  },
+  {
+    "id": 13,
+    "query_type": "Chain Business + General Location Modifier",
+    "section": "10.6.3",
+    "query": "Wendy's near midtown",
+    "result": "Wendy's in Upper East Side",
+    "conditions": [
+      "Correct chain",
+      "Upper East Side is adjacent to midtown"
+    ],
+    "rating": "Good",
+    "reasoning": "Adjacent to specified area but not exactly midtown — Good rating.",
+    "keywords": [
+      "chain",
+      "wendy's",
+      "near modifier",
+      "adjacent area"
+    ]
+  },
+  {
+    "id": 14,
+    "query_type": "Chain Business + Specific Location Modifier",
+    "section": "10.6.3",
+    "query": "Burger King at 400 W 42nd St",
+    "result": "Burger King at 400 W 42nd St",
+    "conditions": [
+      "Correct chain",
+      "Exact address match"
+    ],
+    "rating": "Navigational",
+    "reasoning": "Exact chain at exact specified address — Navigational.",
+    "keywords": [
+      "chain",
+      "specific modifier",
+      "exact address",
+      "navigational"
+    ]
+  },
+  {
+    "id": 15,
+    "query_type": "Chain Business + Specific Location Modifier",
+    "section": "10.6.3",
+    "query": "Subway at 5th and 42nd",
+    "result": "Subway on 44th St (nearest to 5th/42nd)",
+    "conditions": [
+      "Correct chain",
+      "Closest Subway to specified intersection"
+    ],
+    "rating": "Excellent",
+    "reasoning": "Closest Subway to specified intersection — Excellent.",
+    "keywords": [
+      "chain",
+      "subway",
+      "specific modifier",
+      "closest to address"
+    ]
+  },
+  {
+    "id": 16,
+    "query_type": "Non-Specific Address",
+    "section": "10.2",
+    "query": "Main Street",
+    "result": "Main St (central segment)",
+    "conditions": [
+      "Query is street name only",
+      "Result is central segment of Main Street"
+    ],
+    "rating": "Excellent",
+    "reasoning": "Most prominent segment of the queried street shown.",
+    "keywords": [
+      "non-specific address",
+      "street name",
+      "main street",
+      "excellent"
+    ]
+  },
+  {
+    "id": 17,
+    "query_type": "Non-Specific Address",
+    "section": "10.2",
+    "query": "5th Avenue",
+    "result": "5th Avenue, New York City",
+    "conditions": [
+      "Ambiguous street name",
+      "NYC 5th Ave is the most prominent worldwide"
+    ],
+    "rating": "Excellent",
+    "reasoning": "Most prominent disambiguation of the street name globally.",
+    "keywords": [
+      "non-specific address",
+      "5th avenue",
+      "disambiguation"
+    ]
+  },
+  {
+    "id": 18,
+    "query_type": "Non-Specific Address",
+    "section": "10.2",
+    "query": "Oak Road",
+    "result": "Starbucks on Oak Road",
+    "conditions": [
+      "Query is a street name",
+      "Result is a business on that street"
+    ],
+    "rating": "Acceptable",
+    "reasoning": "Shows a POI on the queried street rather than the street itself.",
+    "keywords": [
+      "non-specific address",
+      "street name",
+      "poi on street"
+    ]
+  },
+  {
+    "id": 19,
+    "query_type": "Point of Interest",
+    "section": "8.3.2",
+    "query": "Metropolitan Museum of Art",
+    "result": "The Met",
+    "conditions": [
+      "'The Met' is the official colloquial name",
+      "Same physical location"
+    ],
+    "rating": "Navigational",
+    "reasoning": "Same POI, official colloquial name — Navigational.",
+    "keywords": [
+      "poi",
+      "museum",
+      "colloquial name",
+      "navigational"
+    ]
+  },
+  {
+    "id": 20,
+    "query_type": "Point of Interest",
+    "section": "8.3.2",
+    "query": "Art Institute of Chicago",
+    "result": "Museum of Contemporary Art Chicago",
+    "conditions": [
+      "Different museum",
+      "Same area of Chicago"
+    ],
+    "rating": "Excellent",
+    "reasoning": "Same POI category (museum) in same area.",
+    "keywords": [
+      "poi",
+      "museum",
+      "same area",
+      "same category"
+    ]
+  },
+  {
+    "id": 21,
+    "query_type": "Point of Interest",
+    "section": "8.3.2",
+    "query": "Central Park",
+    "result": "Bryant Park",
+    "conditions": [
+      "Different park",
+      "Different neighborhood of NYC"
+    ],
+    "rating": "Good",
+    "reasoning": "Same category (park), same city but different neighborhood.",
+    "keywords": [
+      "poi",
+      "park",
+      "same city",
+      "different neighborhood"
+    ]
+  },
+  {
+    "id": 22,
+    "query_type": "Point of Interest",
+    "section": "8.3.2",
+    "query": "Toronto Public Library",
+    "result": "Toronto Reference Library",
+    "conditions": [
+      "Same organization",
+      "Central branch of Toronto Public Library system"
+    ],
+    "rating": "Navigational",
+    "reasoning": "Toronto Reference Library is the main branch — same entity.",
+    "keywords": [
+      "poi",
+      "library",
+      "main branch",
+      "navigational"
+    ]
+  },
+  {
+    "id": 23,
+    "query_type": "Famous Landmark",
+    "section": "8.3.2",
+    "query": "Eiffel Tower",
+    "result": "Eiffel Tower",
+    "conditions": [
+      "Exact landmark match"
+    ],
+    "rating": "Navigational",
+    "reasoning": "Exact famous landmark match.",
+    "keywords": [
+      "landmark",
+      "eiffel tower",
+      "exact",
+      "navigational"
+    ]
+  },
+  {
+    "id": 24,
+    "query_type": "Famous Landmark",
+    "section": "8.3.2",
+    "query": "Golden Gate Bridge",
+    "result": "Golden Gate Bridge Welcome Center",
+    "conditions": [
+      "Official welcome center for the landmark",
+      "Same location"
+    ],
+    "rating": "Navigational",
+    "reasoning": "Official welcome center at the landmark — same location, direct access.",
+    "keywords": [
+      "landmark",
+      "golden gate",
+      "welcome center",
+      "navigational"
+    ]
+  },
+  {
+    "id": 25,
+    "query_type": "Near Me",
+    "section": "10.6.2",
+    "query": "Coffee near me",
+    "result": "Starbucks (0.1 miles from user)",
+    "conditions": [
+      "User inside viewport",
+      "Result is the nearest coffee shop to user"
+    ],
+    "rating": "Navigational",
+    "reasoning": "Nearest coffee shop to user with user inside viewport.",
+    "keywords": [
+      "near me",
+      "coffee",
+      "nearest",
+      "user inside viewport"
+    ]
+  },
+  {
+    "id": 26,
+    "query_type": "Near Me",
+    "section": "10.6.2",
+    "query": "Gas station near me",
+    "result": "Shell Station (0.8 miles from user)",
+    "conditions": [
+      "User inside viewport",
+      "Not the nearest — closer gas station exists 0.2 miles away"
+    ],
+    "rating": "Good",
+    "reasoning": "A closer gas station exists — distance demotion to Good.",
+    "keywords": [
+      "near me",
+      "gas station",
+      "closer exists",
+      "good"
+    ]
+  },
+  {
+    "id": 27,
+    "query_type": "Locality Query",
+    "section": "5.16.1",
+    "query": "Brooklyn",
+    "result": "Brooklyn, New York City",
+    "conditions": [
+      "Exact locality match"
+    ],
+    "rating": "Navigational",
+    "reasoning": "Exact locality match to the queried place.",
+    "keywords": [
+      "locality",
+      "brooklyn",
+      "exact match",
+      "navigational"
+    ]
+  },
+  {
+    "id": 28,
+    "query_type": "Locality Query",
+    "section": "5.16.1",
+    "query": "Downtown Seattle",
+    "result": "Downtown Seattle",
+    "conditions": [
+      "Exact locality/neighborhood match"
+    ],
+    "rating": "Navigational",
+    "reasoning": "Exact neighborhood match.",
+    "keywords": [
+      "locality",
+      "downtown",
+      "seattle",
+      "navigational"
+    ]
+  },
+  {
+    "id": 29,
+    "query_type": "Locality Query",
+    "section": "5.16.1",
+    "query": "Georgetown",
+    "result": "Georgetown, Washington D.C.",
+    "conditions": [
+      "Most prominent Georgetown (there are many)",
+      "D.C. Georgetown is the most well-known"
+    ],
+    "rating": "Excellent",
+    "reasoning": "Most prominent Georgetown interpretation globally.",
+    "keywords": [
+      "locality",
+      "georgetown",
+      "disambiguation",
+      "excellent"
+    ]
+  },
+  {
+    "id": 30,
+    "query_type": "Address",
+    "section": "10.2",
+    "query": "123 Main Street, Springfield",
+    "result": "123 Main St, Springfield",
+    "conditions": [
+      "Exact address match"
+    ],
+    "rating": "Navigational",
+    "reasoning": "Exact address match.",
+    "keywords": [
+      "address",
+      "exact match",
+      "navigational"
+    ]
+  },
+  {
+    "id": 31,
+    "query_type": "Address",
+    "section": "10.2",
+    "query": "456 Oak Avenue, Austin TX",
+    "result": "458 Oak Avenue, Austin TX",
+    "conditions": [
+      "Same street",
+      "2 house numbers difference — same block"
+    ],
+    "rating": "Excellent",
+    "reasoning": "Same block, very close house number — effectively same location.",
+    "keywords": [
+      "address",
+      "same block",
+      "close number",
+      "excellent"
+    ]
+  },
+  {
+    "id": 32,
+    "query_type": "Address",
+    "section": "10.2",
+    "query": "100 Broadway, New York",
+    "result": "500 Broadway, New York",
+    "conditions": [
+      "Same street",
+      "400 numbers difference — farther away"
+    ],
+    "rating": "Good",
+    "reasoning": "Same street but farther away on same block range.",
+    "keywords": [
+      "address",
+      "same street",
+      "different number",
+      "good"
+    ]
+  },
+  {
+    "id": 33,
+    "query_type": "Unexpected Result",
+    "section": "5.14",
+    "query": "The Eatery Restaurant",
+    "result": "Smith's Diner (formerly The Eatery)",
+    "conditions": [
+      "Different current name",
+      "Former name mentioned in result"
+    ],
+    "rating": "Excellent",
+    "reasoning": "Rebranded business — former name clearly noted. Connection exists.",
+    "keywords": [
+      "unexpected",
+      "rebranded",
+      "formerly",
+      "excellent"
+    ]
+  },
+  {
+    "id": 34,
+    "query_type": "Unexpected Result",
+    "section": "5.14",
+    "query": "Joe's Pizza",
+    "result": "Central Park",
+    "conditions": [
+      "No connection to pizza or the business name"
+    ],
+    "rating": "Off Topic",
+    "reasoning": "No meaningful connection between a pizza restaurant and a park.",
+    "keywords": [
+      "unexpected",
+      "no connection",
+      "off topic"
+    ]
+  },
+  {
+    "id": 35,
+    "query_type": "Closed Business",
+    "section": "5.14",
+    "query": "Toys R Us",
+    "result": "Toys R Us (Permanently Closed)",
+    "conditions": [
+      "Business is permanently closed",
+      "Result shows the closed business"
+    ],
+    "rating": "Acceptable",
+    "reasoning": "Result is the business queried but it is permanently closed — Acceptable as it answers where it was.",
+    "keywords": [
+      "closed business",
+      "permanently closed",
+      "acceptable"
+    ]
+  },
+  {
+    "id": 36,
+    "query_type": "Closed Business",
+    "section": "5.14",
+    "query": "Blockbuster Video",
+    "result": "Blockbuster Video (Closed 2014)",
+    "conditions": [
+      "Long-closed business",
+      "Historical closure noted"
+    ],
+    "rating": "Acceptable",
+    "reasoning": "Shows the historical location of the closed chain — marginally useful.",
+    "keywords": [
+      "closed business",
+      "blockbuster",
+      "historical",
+      "acceptable"
+    ]
+  },
+  {
+    "id": 37,
+    "query_type": "Transit POI",
+    "section": "5.16.1",
+    "query": "ATM near Grand Central",
+    "result": "Chase ATM inside Grand Central Terminal",
+    "conditions": [
+      "POI directly inside queried transit station",
+      "Serves transit users"
+    ],
+    "rating": "Navigational",
+    "reasoning": "ATM directly inside Grand Central Terminal — perfect match for the transit POI query.",
+    "keywords": [
+      "transit poi",
+      "atm",
+      "grand central",
+      "inside station",
+      "navigational"
+    ]
+  },
+  {
+    "id": 38,
+    "query_type": "Street",
+    "section": "10.2",
+    "query": "Rodeo Drive",
+    "result": "Rodeo Drive, Beverly Hills",
+    "conditions": [
+      "Famous street",
+      "Exact match to most prominent Rodeo Drive"
+    ],
+    "rating": "Navigational",
+    "reasoning": "Exact match to the world-famous Rodeo Drive in Beverly Hills.",
+    "keywords": [
+      "street",
+      "rodeo drive",
+      "famous street",
+      "navigational"
+    ]
+  },
+  {
+    "id": 39,
+    "query_type": "Business + Full Address",
+    "section": "8.3.2",
+    "query": "Shake Shack, 691 8th Ave, New York",
+    "result": "Shake Shack at 691 8th Ave",
+    "conditions": [
+      "Exact business name match",
+      "Exact address match"
+    ],
+    "rating": "Navigational",
+    "reasoning": "Exact business at exact address.",
+    "keywords": [
+      "business full address",
+      "shake shack",
+      "exact",
+      "navigational"
+    ]
+  },
+  {
+    "id": 40,
+    "query_type": "Business + Full Address",
+    "section": "8.3.2",
+    "query": "Hilton Hotel, 123 Park Ave, New York",
+    "result": "Hilton Midtown, 1335 6th Ave",
+    "conditions": [
+      "Same chain but different address",
+      "Different street entirely"
+    ],
+    "rating": "Good",
+    "reasoning": "Same hotel chain but different address — Good as a nearby alternative.",
+    "keywords": [
+      "business full address",
+      "hilton",
+      "wrong address",
+      "good"
+    ]
+  }
+]
