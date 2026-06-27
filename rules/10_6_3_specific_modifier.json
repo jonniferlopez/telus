@@ -1,0 +1,66 @@
+{
+  "rule_number": "10.6.3b",
+  "title": "Chain Business + Specific Location Modifier",
+  "section": "10.6.3",
+  "applies_to": "Chain Business + Specific Location Modifier",
+  "description": "Rules for evaluating map results when the user queries a chain business with a specific location modifier such as a street address, intersection, or named building (e.g., 'McDonald's at 123 Main Street', 'Starbucks on 5th and Broadway').",
+  "decision_logic": [
+    {
+      "step": 1,
+      "condition": "Result is NOT the queried chain",
+      "rating": "Off Topic",
+      "notes": "Must be the correct chain brand"
+    },
+    {
+      "step": 2,
+      "condition": "Result IS the queried chain AND location matches the specific address/intersection exactly",
+      "rating": "Navigational",
+      "notes": "Exact chain match at exact specified location — perfect result"
+    },
+    {
+      "step": 3,
+      "condition": "Result IS the queried chain AND is the closest location to the specified address",
+      "rating": "Excellent",
+      "notes": "Correct chain, closest to specified address but not exact match"
+    },
+    {
+      "step": 4,
+      "condition": "Result IS the queried chain AND is in the same neighborhood as the specified address, but not the closest",
+      "rating": "Good",
+      "notes": "Correct chain, in the general area but not closest to specified location"
+    },
+    {
+      "step": 5,
+      "condition": "Result IS the queried chain but is in a different neighborhood from the specified address",
+      "rating": "Acceptable",
+      "notes": "Correct chain but wrong area relative to the specific modifier"
+    }
+  ],
+  "exceptions": [
+    "If no location of the chain exists within a wide radius of the specified address, nearest may rate Excellent",
+    "Intersections are considered exact if the result is on one of the specified streets at that intersection"
+  ],
+  "calibration_examples": [
+    {
+      "query": "Burger King at 400 W 42nd St",
+      "result": "Burger King at 400 W 42nd St",
+      "conditions": ["Correct chain", "Exact address match"],
+      "rating": "Navigational",
+      "reasoning": "Exact chain at exact specified address — step 2 applies"
+    },
+    {
+      "query": "Subway at 5th and 42nd",
+      "result": "Subway on 44th St (nearest to 5th/42nd)",
+      "conditions": ["Correct chain", "Closest Subway to specified intersection but not exact"],
+      "rating": "Excellent",
+      "reasoning": "Closest Subway to specified intersection — step 3 applies"
+    },
+    {
+      "query": "Taco Bell on Main St",
+      "result": "Taco Bell on Oak Ave (different neighborhood)",
+      "conditions": ["Correct chain", "Different neighborhood from specified street"],
+      "rating": "Acceptable",
+      "reasoning": "Wrong neighborhood relative to specified street — step 5 applies"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "rule_number": "10.6.2",
+  "title": "Chain Business Queries (No Location Modifier)",
+  "section": "10.6.2",
+  "applies_to": "Chain Business",
+  "description": "Rules for evaluating map results when the user queries a chain/franchise business by name only, with no specific location modifier (e.g., 'McDonald's', 'Starbucks').",
+  "decision_logic": [
+    {
+      "step": 1,
+      "condition": "Result is NOT the queried chain (different brand or unrelated entity)",
+      "rating": "Off Topic",
+      "notes": "The result must be the correct chain to proceed"
+    },
+    {
+      "step": 2,
+      "condition": "Result IS the queried chain. Fresh viewport. No closer locations of the same chain exist in viewport. Result is the closest location.",
+      "rating": "Navigational",
+      "notes": "Fresh viewport, correct chain, and it is the closest — perfect result"
+    },
+    {
+      "step": 3,
+      "condition": "Result IS the queried chain. Fresh viewport. 1–2 closer locations of the same chain exist in the viewport but are not shown first.",
+      "rating": "Good",
+      "notes": "Distance demotion applies — closer options exist that should have ranked higher"
+    },
+    {
+      "step": 4,
+      "condition": "Result IS the queried chain. Fresh viewport. 3+ closer locations of the same chain exist in the viewport.",
+      "rating": "Acceptable",
+      "notes": "Heavy distance demotion — result is far from the most relevant option"
+    },
+    {
+      "step": 5,
+      "condition": "Result IS the queried chain. Stale viewport. No closer locations visible.",
+      "rating": "Excellent",
+      "notes": "Stale viewport reduces confidence but chain match is strong; distance less certain"
+    },
+    {
+      "step": 6,
+      "condition": "Result IS the queried chain. User is inside viewport. Result is the nearest chain location to user.",
+      "rating": "Navigational",
+      "notes": "User location known, result is closest — best possible answer"
+    },
+    {
+      "step": 7,
+      "condition": "Result IS the queried chain. User is inside viewport. Closer locations of the same chain exist nearer to user.",
+      "rating": "Good",
+      "notes": "User-relative distance demotion — closer to user options exist"
+    }
+  ],
+  "exceptions": [
+    "Temporarily closed locations should be rated lower (Acceptable or Off Topic) depending on how long closed",
+    "A chain with only one location in the entire area always rates Navigational regardless of distance",
+    "If the viewport is very zoomed out, distance comparisons may differ from user expectations",
+    "Franchise vs. corporate-owned differences do not affect rating unless the query specifies"
+  ],
+  "calibration_examples": [
+    {
+      "query": "Wendy's",
+      "result": "Wendy's on Main St",
+      "conditions": ["Fresh viewport", "Two closer Wendy's locations exist in viewport", "User outside viewport"],
+      "rating": "Good",
+      "reasoning": "Two closer Wendy's exist — distance demotion to Good (1-2 closer: step 3)"
+    },
+    {
+      "query": "McDonald's",
+      "result": "McDonald's on Oak Ave",
+      "conditions": ["Fresh viewport", "No closer McDonald's in viewport", "Is the closest location"],
+      "rating": "Navigational",
+      "reasoning": "Closest McDonald's with fresh viewport and no closer alternatives — step 2 applies"
+    },
+    {
+      "query": "Starbucks",
+      "result": "Starbucks on 5th Ave",
+      "conditions": ["Fresh viewport", "Four closer Starbucks locations exist and are not shown"],
+      "rating": "Acceptable",
+      "reasoning": "3+ closer Starbucks exist — heavy distance demotion to Acceptable (step 4)"
+    },
+    {
+      "query": "Subway",
+      "result": "Pizza Hut",
+      "conditions": ["Result is not a Subway restaurant"],
+      "rating": "Off Topic",
+      "reasoning": "Result is a different chain entirely — step 1 applies"
+    }
+  ]
+}

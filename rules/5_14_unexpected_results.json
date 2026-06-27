@@ -1,0 +1,61 @@
+{
+  "rule_number": "5.14",
+  "title": "Unexpected Results",
+  "section": "5.14",
+  "applies_to": "Unexpected Result",
+  "description": "Rules for evaluating results that appear to be unrelated to or unexpectedly different from what the user queried. An unexpected result is one where the connection between query and result is not obvious.",
+  "decision_logic": [
+    {
+      "step": 1,
+      "condition": "There is a clear, logical connection between the query and the result (e.g., common abbreviation, DBA name, known alias)",
+      "rating": "Excellent",
+      "notes": "Connection exists — result is not truly unexpected once the relationship is understood"
+    },
+    {
+      "step": 2,
+      "condition": "There is a weak or indirect connection (e.g., result is at the same address, has a related name, serves similar purpose)",
+      "rating": "Acceptable",
+      "notes": "Some connection exists but it is not obvious"
+    },
+    {
+      "step": 3,
+      "condition": "Result is at the correct location but is a different entity entirely (e.g., building at the address, not the business)",
+      "rating": "Acceptable",
+      "notes": "Location match only, not a name/entity match"
+    },
+    {
+      "step": 4,
+      "condition": "Result has no meaningful connection to the query",
+      "rating": "Off Topic",
+      "notes": "Truly unexpected and irrelevant — no connection can be found"
+    }
+  ],
+  "exceptions": [
+    "Results that show the parent company of a queried subsidiary may be Excellent if parent is well-known",
+    "Rebranded businesses may still rate Excellent if the old name is in the result's description",
+    "Seasonal or event-based results that match query intent may rate higher"
+  ],
+  "calibration_examples": [
+    {
+      "query": "The Eatery",
+      "result": "Smith's Diner (formerly The Eatery)",
+      "conditions": ["Result has a different name", "Former name mentioned in description"],
+      "rating": "Excellent",
+      "reasoning": "The business was rebranded but previous name is noted — clear connection, step 1"
+    },
+    {
+      "query": "City Hall",
+      "result": "Municipal Services Building",
+      "conditions": ["Different name", "Houses some city hall functions"],
+      "rating": "Acceptable",
+      "reasoning": "Weak connection — houses some city functions but is not city hall, step 2"
+    },
+    {
+      "query": "Joe's Pizza",
+      "result": "Central Park",
+      "conditions": ["No connection to a pizza restaurant", "Park is completely unrelated"],
+      "rating": "Off Topic",
+      "reasoning": "No meaningful connection between a pizza restaurant and a park — step 4"
+    }
+  ]
+}

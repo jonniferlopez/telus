@@ -1,0 +1,75 @@
+{
+  "rule_number": "5.16.1",
+  "title": "Transit Station Queries",
+  "section": "5.16.1",
+  "applies_to": "Transit Query",
+  "description": "Rules for evaluating map results when the user queries for a transit station, stop, terminal, or other transit facility.",
+  "decision_logic": [
+    {
+      "step": 1,
+      "condition": "Result is the exact transit station or stop queried (same name, same location)",
+      "rating": "Navigational",
+      "notes": "Perfect match — user would navigate directly to this result"
+    },
+    {
+      "step": 2,
+      "condition": "No exact match, but result is a transit station in the same locality",
+      "rating": "Excellent",
+      "notes": "Same city or neighborhood; user can still find their destination transit"
+    },
+    {
+      "step": 3,
+      "condition": "No exact match, result is a transit station in a neighboring/adjacent locality",
+      "rating": "Good",
+      "notes": "Close enough to be useful; user may be able to transfer"
+    },
+    {
+      "step": 4,
+      "condition": "No exact match, result is a transit station further away (same system)",
+      "rating": "Acceptable",
+      "notes": "Same transit system but distant; marginally useful"
+    },
+    {
+      "step": 5,
+      "condition": "Result is completely unrelated to transit or the queried location",
+      "rating": "Off Topic",
+      "notes": "No relevance to the transit query"
+    }
+  ],
+  "exceptions": [
+    "Airport queries may follow stricter Navigational criteria — only the queried airport qualifies",
+    "Bus stops for the same route as a queried bus terminal may rate Excellent",
+    "If query includes a route number, exact route match is required for Navigational",
+    "Transit hubs (e.g., central interchange stations) may rate Excellent even without exact name match if they serve the same area"
+  ],
+  "calibration_examples": [
+    {
+      "query": "Davenport Station",
+      "result": "King Station",
+      "conditions": ["No exact Davenport Station found", "King Station is in the same locality as Davenport"],
+      "rating": "Excellent",
+      "reasoning": "King Station is in the same locality as the queried Davenport Station — step 2 applies"
+    },
+    {
+      "query": "Union Station Chicago",
+      "result": "Union Station Chicago",
+      "conditions": ["Exact name and location match"],
+      "rating": "Navigational",
+      "reasoning": "Exact match to the queried Union Station in Chicago — step 1 applies"
+    },
+    {
+      "query": "Main Street Subway Station",
+      "result": "Danforth Station",
+      "conditions": ["No Main Street Station found", "Danforth is in a neighboring locality"],
+      "rating": "Good",
+      "reasoning": "Danforth is in a neighboring locality — step 3 applies"
+    },
+    {
+      "query": "Bay Station",
+      "result": "Bay Street Bus Stop",
+      "conditions": ["Exact station name match on Bay", "Same locality"],
+      "rating": "Navigational",
+      "reasoning": "Serves Bay Street in the same location as queried"
+    }
+  ]
+}
